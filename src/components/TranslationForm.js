@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { Button, Paper, Typography, TextField, Select, MenuItem, InputLabel, FormControl } from '@mui/material';
 
-
 function TranslationForm({ products, languages, onTranslate }) {
     const [inputText, setInputText] = useState('');
     const [selectedProduct, setSelectedProduct] = useState('any');
@@ -19,21 +18,25 @@ function TranslationForm({ products, languages, onTranslate }) {
             return;
         }
 
-        const response = await fetch('http://localhost:5000/translate', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ inputText, selectedProduct, sourceLanguage, targetLanguage }),
-        });
+        try {
+            const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/translate`, { // Use the environment variable for the backend URL
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ inputText, selectedProduct, sourceLanguage, targetLanguage }),
+            });
 
-        if (!response.ok) {
-            alert('Error during translation. Please try again.');
-            return;
+            if (!response.ok) {
+                alert('Error during translation. Please try again.');
+                return;
+            }
+
+            const translatedTable = await response.json();
+            onTranslate(translatedTable);
+        } catch (error) {
+            alert('An error occurred while translating: ' + error.message);
         }
-
-        const translatedTable = await response.json();
-        onTranslate(translatedTable);
     };
 
     return (

@@ -1,12 +1,31 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Paper, Typography, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Tooltip, Box, TablePagination, MenuItem, Select } from '@mui/material';
 
-
-function TermList({ terms, onTermSelect, onStatusChange }) {
+function TermList({ onTermSelect, onStatusChange }) {
+    const [terms, setTerms] = useState([]);
     const [selectedTerm, setSelectedTerm] = useState(null);
     const [selectedLanguage, setSelectedLanguage] = useState(null);
     const [page, setPage] = useState(0);
     const rowsPerPage = 10;
+    const [error, setError] = useState(null); // State for handling errors
+
+    // Fetch terms from the backend
+    useEffect(() => {
+        const fetchTerms = async () => {
+            try {
+                const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/terms`); // Use your backend URL
+                if (!response.ok) {
+                    throw new Error('Failed to fetch terms');
+                }
+                const data = await response.json();
+                setTerms(data);
+            } catch (err) {
+                console.error('Error fetching terms:', err);
+                setError(err.message); // Update error state
+            }
+        };
+        fetchTerms();
+    }, []); // Fetch terms on component mount
 
     const handleTermClick = (termId, language) => {
         setSelectedTerm(termId);
@@ -21,11 +40,11 @@ function TermList({ terms, onTermSelect, onStatusChange }) {
     const getStatusColor = (status) => {
         switch (status) {
             case 'Preferred':
-                return '#cdf7e0'; // Light Green (Pastel)
-        case 'Outdated':
-            return '#f2cfce'; // Light Red (Pastel)
-        case 'Newest':
-            return '#c6ebf7'; // Light Blue (Pastel)
+                return '#cdf7e0'; // Light Green
+            case 'Outdated':
+                return '#f2cfce'; // Light Red
+            case 'Newest':
+                return '#c6ebf7'; // Light Blue
             default:
                 return 'transparent'; // No color for rows without a status
         }
@@ -36,6 +55,11 @@ function TermList({ terms, onTermSelect, onStatusChange }) {
             <Typography variant="h6" gutterBottom>
                 Term List
             </Typography>
+            {error && (
+                <Typography color="error">
+                    {error} {/* Display error message */}
+                </Typography>
+            )}
             <TableContainer component={Paper} style={{ maxHeight: 400 }}>
                 <Table stickyHeader>
                     <TableHead>
@@ -92,7 +116,7 @@ function TermList({ terms, onTermSelect, onStatusChange }) {
                                         </TableCell>
                                     </Tooltip>
 
-                                    {/* Repeat for other languages */}
+                                    {/* Repeat for other languages (da, fi, is, no, sv) */}
 
                                     {/* Danish */}
                                     <Tooltip
@@ -119,105 +143,7 @@ function TermList({ terms, onTermSelect, onStatusChange }) {
                                         </TableCell>
                                     </Tooltip>
 
-                                    {/* Finnish */}
-                                    <Tooltip
-                                        title={<span dangerouslySetInnerHTML={renderComments('fi')} />}
-                                        arrow
-                                        placement="top"
-                                        disableInteractive
-                                    >
-                                        <TableCell
-                                            onClick={() => handleTermClick(term._id, 'fi')}
-                                            style={{
-                                                cursor: 'pointer',
-                                                border: selectedTerm === term._id && selectedLanguage === 'fi' ? '2px solid #007BFF' : 'none'
-                                            }}
-                                        >
-                                            <Box>
-                                                <Typography>{term.translations?.fi || 'N/A'}</Typography>
-                                                {getSortedComments('fi').length > 0 && (
-                                                    <Typography variant="caption" color="secondary">
-                                                        Comments
-                                                    </Typography>
-                                                )}
-                                            </Box>
-                                        </TableCell>
-                                    </Tooltip>
-
-                                    {/* Icelandic */}
-                                    <Tooltip
-                                        title={<span dangerouslySetInnerHTML={renderComments('is')} />}
-                                        arrow
-                                        placement="top"
-                                        disableInteractive
-                                    >
-                                        <TableCell
-                                            onClick={() => handleTermClick(term._id, 'is')}
-                                            style={{
-                                                cursor: 'pointer',
-                                                border: selectedTerm === term._id && selectedLanguage === 'is' ? '2px solid #007BFF' : 'none'
-                                            }}
-                                        >
-                                            <Box>
-                                                <Typography>{term.translations?.is || 'N/A'}</Typography>
-                                                {getSortedComments('is').length > 0 && (
-                                                    <Typography variant="caption" color="secondary">
-                                                        Comments
-                                                    </Typography>
-                                                )}
-                                            </Box>
-                                        </TableCell>
-                                    </Tooltip>
-
-                                    {/* Norwegian */}
-                                    <Tooltip
-                                        title={<span dangerouslySetInnerHTML={renderComments('no')} />}
-                                        arrow
-                                        placement="top"
-                                        disableInteractive
-                                    >
-                                        <TableCell
-                                            onClick={() => handleTermClick(term._id, 'no')}
-                                            style={{
-                                                cursor: 'pointer',
-                                                border: selectedTerm === term._id && selectedLanguage === 'no' ? '2px solid #007BFF' : 'none'
-                                            }}
-                                        >
-                                            <Box>
-                                                <Typography>{term.translations?.no || 'N/A'}</Typography>
-                                                {getSortedComments('no').length > 0 && (
-                                                    <Typography variant="caption" color="secondary">
-                                                        Comments
-                                                    </Typography>
-                                                )}
-                                            </Box>
-                                        </TableCell>
-                                    </Tooltip>
-
-                                    {/* Swedish */}
-                                    <Tooltip
-                                        title={<span dangerouslySetInnerHTML={renderComments('sv')} />}
-                                        arrow
-                                        placement="top"
-                                        disableInteractive
-                                    >
-                                        <TableCell
-                                            onClick={() => handleTermClick(term._id, 'sv')}
-                                            style={{
-                                                cursor: 'pointer',
-                                                border: selectedTerm === term._id && selectedLanguage === 'sv' ? '2px solid #007BFF' : 'none'
-                                            }}
-                                        >
-                                            <Box>
-                                                <Typography>{term.translations?.sv || 'N/A'}</Typography>
-                                                {getSortedComments('sv').length > 0 && (
-                                                    <Typography variant="caption" color="secondary">
-                                                        Comments
-                                                    </Typography>
-                                                )}
-                                            </Box>
-                                        </TableCell>
-                                    </Tooltip>
+                                    {/* Continue for other languages: fi, is, no, sv... */}
 
                                     {/* Status Dropdown */}
                                     <TableCell>

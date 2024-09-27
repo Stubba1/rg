@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { TextField, Button, Paper, Grid } from '@mui/material';
 import axios from 'axios';
 
-
 function AddTermForm({ onTermAdded }) {
     const [productName, setProductName] = useState('');
     const [translations, setTranslations] = useState({
@@ -24,7 +23,7 @@ function AddTermForm({ onTermAdded }) {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.post('http://localhost:5000/terms', {
+            const response = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/terms`, { // Use the environment variable for the backend URL
                 productName,
                 translations
             });
@@ -40,6 +39,7 @@ function AddTermForm({ onTermAdded }) {
             });
         } catch (error) {
             console.error('There was an error adding the term!', error);
+            // Optionally, you can handle error feedback here (e.g., setting an error message in state)
         }
     };
 

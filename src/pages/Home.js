@@ -37,7 +37,7 @@ function Home() {
 
     const fetchTerms = async () => {
         try {
-            const response = await axios.get('http://localhost:5000/terms');
+            const response = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/terms`); // Use the environment variable for the backend URL
             setTerms(response.data);
             const uniqueProducts = [...new Set(response.data.map(term => term.productName))];
             setProducts(uniqueProducts);
@@ -90,7 +90,7 @@ function Home() {
     };
 
     const handleStatusChange = (termId, newStatus) => {
-        axios.put(`http://localhost:5000/terms/${termId}`, { status: newStatus })
+        axios.put(`${process.env.REACT_APP_BACKEND_URL}/terms/${termId}`, { status: newStatus }) // Use the environment variable for the backend URL
             .then(response => {
                 setTerms(prevTerms => prevTerms.map(term => (term._id === termId ? { ...term, status: newStatus } : term)));
             })

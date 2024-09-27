@@ -26,5 +26,26 @@
         "resourcelabel": {}
       }
     }
+  },
+  "tuuri": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-herbie-tuuri-9b0df-authRole",
+      "UnauthRoleArn": "arn:aws:iam::588400839220:role/amplify-herbie-tuuri-9b0df-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::588400839220:role/amplify-herbie-tuuri-9b0df-authRole",
+      "Region": "eu-central-1",
+      "DeploymentBucketName": "amplify-herbie-tuuri-9b0df-deployment",
+      "UnauthRoleName": "amplify-herbie-tuuri-9b0df-unauthRole",
+      "StackName": "amplify-herbie-tuuri-9b0df",
+      "StackId": "arn:aws:cloudformation:eu-central-1:588400839220:stack/amplify-herbie-tuuri-9b0df/d89b31e0-7d06-11ef-bcc1-0a5d96b012ed",
+      "AmplifyAppId": "d3ombzx3zlmapi"
+    },
+    "categories": {
+      "auth": {
+        "herbie": {}
+      },
+      "function": {
+        "herbied2cbc653": {}
+      }
+    }
   }
 }

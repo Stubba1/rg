@@ -47,23 +47,5 @@
       "providerPlugin": "awscloudformation",
       "service": "Lambda"
     }
-  },
-  "parameters": {
-    "AMPLIFY_function_herbied2cbc653_deploymentBucketName": {
-      "usedBy": [
-        {
-          "category": "function",
-          "resourceName": "herbied2cbc653"
-        }
-      ]
-    },
-    "AMPLIFY_function_herbied2cbc653_s3Key": {
-      "usedBy": [
-        {
-          "category": "function",
-          "resourceName": "herbied2cbc653"
-        }
-      ]
-    }
   }
 }

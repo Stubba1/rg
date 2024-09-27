@@ -3,7 +3,6 @@ import { Button, Typography, Paper } from '@mui/material';
 import axios from 'axios';
 import TurtleMascot from './TurtleMascot';
 
-
 function FileUpload({ onTermsAdded }) {
     const [file, setFile] = useState(null);
     const [message, setMessage] = useState('');
@@ -20,7 +19,7 @@ function FileUpload({ onTermsAdded }) {
         formData.append('file', file);
 
         try {
-            const response = await axios.post('http://localhost:5000/upload', formData, {
+            const response = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/upload`, formData, { // Use the environment variable for the backend URL
                 headers: {
                     'Content-Type': 'multipart/form-data',
                 },
