@@ -23,7 +23,7 @@ function AddTermForm({ onTermAdded }) {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/terms`, { // Use the environment variable for the backend URL
+            const response = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/terms`, { // Ensure this uses HTTPS via the environment variable
                 productName,
                 translations
             });

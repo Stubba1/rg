@@ -19,7 +19,7 @@ function TranslationForm({ products, languages, onTranslate }) {
         }
 
         try {
-            const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/translate`, { // Use the environment variable for the backend URL
+            const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/translate`, { // Ensure this uses HTTPS via the environment variable
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

@@ -37,7 +37,7 @@ function Home() {
 
     const fetchTerms = async () => {
         try {
-            const response = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/terms`); // Use the environment variable for the backend URL
+            const response = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/terms`); // Ensure this uses HTTPS
             setTerms(response.data);
             const uniqueProducts = [...new Set(response.data.map(term => term.productName))];
             setProducts(uniqueProducts);
@@ -90,7 +90,7 @@ function Home() {
     };
 
     const handleStatusChange = (termId, newStatus) => {
-        axios.put(`${process.env.REACT_APP_BACKEND_URL}/terms/${termId}`, { status: newStatus }) // Use the environment variable for the backend URL
+        axios.put(`${process.env.REACT_APP_BACKEND_URL}/terms/${termId}`, { status: newStatus }) // Ensure this uses HTTPS
             .then(response => {
                 setTerms(prevTerms => prevTerms.map(term => (term._id === termId ? { ...term, status: newStatus } : term)));
             })
