@@ -1,0 +1,69 @@
+{
+  "api": {
+    "resourcelabel": {
+      "dependsOn": [
+        {
+          "attributes": [
+            "Name",
+            "Arn"
+          ],
+          "category": "function",
+          "resourceName": "herbied2cbc653"
+        }
+      ],
+      "providerPlugin": "awscloudformation",
+      "service": "API Gateway"
+    }
+  },
+  "auth": {
+    "herbie": {
+      "dependsOn": [],
+      "frontendAuthConfig": {
+        "mfaConfiguration": "OFF",
+        "mfaTypes": [
+          "SMS"
+        ],
+        "passwordProtectionSettings": {
+          "passwordPolicyCharacters": [],
+          "passwordPolicyMinLength": 8
+        },
+        "signupAttributes": [
+          "EMAIL"
+        ],
+        "socialProviders": [],
+        "usernameAttributes": [],
+        "verificationMechanisms": [
+          "EMAIL"
+        ]
+      },
+      "providerPlugin": "awscloudformation",
+      "service": "Cognito",
+      "serviceType": "managed"
+    }
+  },
+  "function": {
+    "herbied2cbc653": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    }
+  },
+  "parameters": {
+    "AMPLIFY_function_herbied2cbc653_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "herbied2cbc653"
+        }
+      ]
+    },
+    "AMPLIFY_function_herbied2cbc653_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "herbied2cbc653"
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-herbie-dev-3f019-authRole",
+      "UnauthRoleArn": "arn:aws:iam::588400839220:role/amplify-herbie-dev-3f019-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::588400839220:role/amplify-herbie-dev-3f019-authRole",
+      "Region": "eu-central-1",
+      "DeploymentBucketName": "amplify-herbie-dev-3f019-deployment",
+      "UnauthRoleName": "amplify-herbie-dev-3f019-unauthRole",
+      "StackName": "amplify-herbie-dev-3f019",
+      "StackId": "arn:aws:cloudformation:eu-central-1:588400839220:stack/amplify-herbie-dev-3f019/d1632110-7c4f-11ef-8526-068c37d54a7f",
+      "AmplifyAppId": "d1mgfqxcypt8br",
+      "APIGatewayAuthURL": "https://s3.amazonaws.com/amplify-herbie-dev-3f019-deployment/amplify-cfn-templates/api/APIGatewayAuthStack.json"
+    },
+    "categories": {
+      "function": {
+        "herbied2cbc653": {
+          "deploymentBucketName": "amplify-herbie-dev-3f019-deployment",
+          "s3Key": "amplify-builds/herbied2cbc653-485079546c4167334369-build.zip"
+        }
+      },
+      "auth": {
+        "herbie": {}
+      },
+      "api": {
+        "resourcelabel": {}
+      }
+    }
+  }
+}
